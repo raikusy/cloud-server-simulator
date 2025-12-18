@@ -332,7 +332,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 								<button
 									onClick={() => onBuyNode(selectedNodeType)}
 									disabled={gameState.budget < cost}
-									className="w-full flex items-center justify-between p-3 rounded bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+									className="w-full flex items-center justify-between p-3 rounded bg-blue-600 hover:bg-blue-500 hover:cursor-pointer disabled:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
 								>
 									<div className="flex flex-col items-start">
 										<span className="text-sm font-bold text-white flex items-center gap-2">
@@ -413,7 +413,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 											<button
 												onClick={() => upgradeNode(node.id)}
 												disabled={gameState.budget < upgradeCost}
-												className="p-1.5 hover:bg-slate-600 rounded text-cyan-400 disabled:opacity-30 transition-colors flex flex-col items-center"
+												className="p-1.5 hover:bg-slate-600 rounded text-cyan-400 disabled:opacity-30 transition-colors flex flex-col items-center hover:cursor-pointer"
 												title={`Upgrade to ${nextTier} ($${upgradeCost})`}
 											>
 												<ArrowUpCircle className="w-4 h-4" />
@@ -426,7 +426,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 											node.status !== NodeStatus.CRASHED && (
 												<button
 													onClick={() => onRepairNode(node.id)}
-													className="p-1.5 hover:bg-slate-600 rounded text-amber-400 transition-colors"
+													className="p-1.5 hover:bg-slate-600 rounded text-amber-400 transition-colors hover:cursor-pointer"
 													title={`Repair ($${repairCost})`}
 													disabled={gameState.budget < repairCost}
 												>
@@ -436,7 +436,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 										{node.status === NodeStatus.CRASHED && (
 											<button
 												onClick={() => onRepairNode(node.id)}
-												className="p-1.5 hover:bg-slate-600 rounded text-red-400 transition-colors flex flex-col items-center"
+												className="p-1.5 hover:bg-slate-600 rounded text-red-400 transition-colors flex flex-col items-center hover:cursor-pointer"
 												title={`Reboot ($${repairCost})`}
 											>
 												<RotateCw className="w-4 h-4" />
@@ -806,7 +806,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 												key={mode}
 												onClick={() => setFirewallMode(mode)}
 												className={`
-                            px-0.5 py-1 text-[8px] uppercase font-bold rounded border transition-all
+                            px-0.5 py-1 text-[8px] uppercase font-bold rounded border transition-all hover:cursor-pointer
                             ${
 															gameState.firewallMode === mode
 																? "bg-rose-600 border-rose-500 text-white shadow-[0_0_8px_rgba(225,29,72,0.5)]"
@@ -843,7 +843,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 											onClick={() => activateTask && activateTask(task.id)}
 											disabled={isOnCooldown || task.isActive}
 											className={`
-                          w-full p-2 rounded flex items-center justify-between text-left border transition-all
+                          w-full p-2 rounded flex items-center justify-between text-left border transition-all hover:cursor-pointer
                           ${
 														task.isActive
 															? "bg-emerald-900/50 border-emerald-500 text-emerald-200"

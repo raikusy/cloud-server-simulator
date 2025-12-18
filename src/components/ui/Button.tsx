@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
 	...props
 }) => {
 	const baseStyle =
-		"font-medium rounded focus:outline-none transition-all flex items-center justify-center gap-2";
+		"font-medium rounded focus:outline-none transition-all flex items-center justify-center gap-2 hover:cursor-pointer";
 
 	const variants = {
 		primary:
