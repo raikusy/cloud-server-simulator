@@ -1,75 +1,106 @@
-# React + TypeScript + Vite
+# Cloud Architect (Cloud Server Simulator)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time infrastructure management sim where you scale a cloud architecture under rising traffic, shifting workloads, and security incidents. Keep **reputation** high, stay **profitable**, and prevent your system from collapsing.
 
-Currently, two official plugins are available:
+![Cloud Architect Simulator screenshot](./screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Game loop
 
-## React Compiler
+Every second (a “tick”), the simulator:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Generates traffic** based on growth + randomness
+- **Applies a traffic pattern** (Normal Flow / Shopping Spree / Data Ingestion / Viral Content)
+- **Injects attacks/events** occasionally (botnet DDoS, viral spikes, cooling failure, fiber cut, investor funding)
+- **Routes requests through your stack** (ALB → WAF → CDN → App/Worker/DB)
+- **Computes throughput, drops, and health decay**
+- **Updates economics** (revenue vs upkeep) and **reputation** based on success + security outcomes
 
-Note: This will impact Vite dev & build performances.
+Your job is to continuously invest in capacity and efficiency while keeping operating costs (upkeep) under control.
 
-## Expanding the ESLint configuration
+## What you can build / upgrade
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Nodes (horizontal scaling)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Provision and upgrade nodes across three layers:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **APP**: handles general request processing
+- **WORKER**: handles heavy compute (uploads, writes)
+- **DB**: handles reads/writes/search (more expensive; critical bottleneck)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Each node has:
+
+- **Tier**: T1 → T2 → T3 (higher capacity, higher upkeep)
+- **Health**: decays faster when overloaded; can crash and require repair/reboot
+
+### Components (platform scaling)
+
+- **ALB (Load Balancer)**: hard caps max incoming request rate
+- **WAF (Firewall)**: blocks malicious traffic; can overload under extreme load
+- **CDN**: serves static traffic; overflow falls back to app servers
+- **DB Tech**: multiplies effective DB capacity (efficiency)
+- **Cache (Redis)**: reduces DB read/search demand
+- **Queue (SQS)**: buffers bursts for write/upload workloads
+
+## Operations (one-click “tasks”)
+
+Timed boosts with cooldowns:
+
+- **Flush CDN Cache**: temporary CDN capacity boost
+- **Optimize Indexes**: temporary DB efficiency boost
+- **Live Security Patch**: temporary WAF boost
+
+## Security modes
+
+Switch WAF behavior:
+
+- **Standard**: baseline filtering, no false positives
+- **High Sec**: better blocking, small false positive rate (may drop legit requests)
+- **Panic**: strongest blocking, high false positive rate
+
+## Win / lose conditions
+
+There’s no “win screen” — the challenge is how long you can survive as traffic scales.
+
+You **lose** when either:
+
+- **Reputation hits 0%**
+- **Budget falls too far into the red** (bankruptcy threshold)
+
+## Tips
+
+- **Upgrade ALB early**: it’s a hard cap; if you hit it you’ll drop traffic immediately.
+- **Watch the bottleneck**: DB overload cascades into drops and reputation loss.
+- **Use cache + DB tech** to tame read/search-heavy patterns.
+- **Use queue + workers** for write/upload-heavy patterns.
+- **Avoid running hot**: overload accelerates node health decay and can cause crashes.
+
+## Tech stack
+
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- Recharts (traffic chart)
+- Lucide (icons)
+
+## Running locally (bun)
+
+```bash
+bun install
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the URL printed by Vite (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Production build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun run build
+bun run preview
+```
+
+## Formatting / linting
+
+```bash
+bun run format
+bun run lint
 ```
