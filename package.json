@@ -4,11 +4,11 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "tsc -b && vite build",
-		"preview": "vite preview",
-		"format": "biome format --write ./src",
-		"lint": "biome check --write ./src"
+		"dev": "bun run --bun vite",
+		"build": "bun run --bun tsc -b && bun run --bun vite build",
+		"preview": "bun run --bun vite preview",
+		"format": "bun run --bun biome format --write ./src",
+		"lint": "bun run --bun biome check --write ./src"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.18",
@@ -20,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.10",
+		"@cloudflare/vite-plugin": "^1.19.0",
 		"@types/node": "^24.10.4",
 		"@types/react": "^19.2.7",
 		"@types/react-dom": "^19.2.3",
@@ -27,7 +28,8 @@
 		"babel-plugin-react-compiler": "^1.0.0",
 		"globals": "^16.5.0",
 		"typescript": "~5.9.3",
-		"vite": "npm:rolldown-vite@7.2.5"
+		"vite": "npm:rolldown-vite@7.2.5",
+		"wrangler": "^4.56.0"
 	},
 	"overrides": {
 		"vite": "npm:rolldown-vite@7.2.5"
