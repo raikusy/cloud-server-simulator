@@ -554,7 +554,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 									stackId="1"
 									stroke="#ef4444"
 									fill="url(#colorMalicious)"
-									animationDuration={300}
+									isAnimationActive={false}
 								/>
 								<Area
 									type="monotone"
@@ -562,7 +562,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 									stackId="2"
 									stroke="#3b82f6"
 									fill="url(#colorLegit)"
-									animationDuration={300}
+									isAnimationActive={false}
 								/>
 								<Area
 									type="step"
@@ -571,7 +571,7 @@ export const GameDashboard: React.FC<GameDashboardProps> = ({
 									fill="none"
 									strokeWidth={2}
 									dot={false}
-									animationDuration={300}
+									isAnimationActive={false}
 								/>
 							</AreaChart>
 						</ResponsiveContainer>
